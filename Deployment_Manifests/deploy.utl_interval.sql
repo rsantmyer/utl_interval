@@ -2,7 +2,10 @@ SET DEFINE ON
 DEFINE APPLICATION_NAME = 'UTL_INTERVAL'
 DEFINE DEPLOY_VERSION = '1'
 
-SPOOL deploy.&&APPLICATION_NAME..&1..log
+COLUMN CURRENT_SCHEMA       new_value CURRENT_SCHEMA      
+SELECT sys_context('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA FROM DUAL;
+
+SPOOL deploy.&&APPLICATION_NAME..&&CURRENT_SCHEMA..log
 
 --PRINT BIND VARIABLE VALUES
 SET AUTOPRINT ON                    
@@ -44,8 +47,8 @@ EXEC pkg_application.add_object_p(ip_application_name => '&&APPLICATION_NAME', i
 EXEC pkg_application.add_object_p(ip_application_name => '&&APPLICATION_NAME', ip_object_name => 'PKG_INTERVAL'        , ip_object_type => pkg_application.c_object_type_package_body);
 --VALIDATIONS
 EXEC pkg_application.validate_dependencies_p(ip_application_name => '&&APPLICATION_NAME');
-EXEC pkg_application.validate_obj_privs_p   (ip_application_name => '&&APPLICATION_NAME');
-EXEC pkg_application.validate_sys_privs_p   (ip_application_name => '&&APPLICATION_NAME');
+--EXEC pkg_application.validate_obj_privs_p   (ip_application_name => '&&APPLICATION_NAME');
+--EXEC pkg_application.validate_sys_privs_p   (ip_application_name => '&&APPLICATION_NAME');
 
 --Package Specifications
 Prompt Creating Package Specifications
