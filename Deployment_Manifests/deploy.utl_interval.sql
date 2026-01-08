@@ -1,6 +1,9 @@
 SET DEFINE ON
 DEFINE APPLICATION_NAME = 'UTL_INTERVAL'
-DEFINE DEPLOY_VERSION = '1'
+DEFINE DEPLOY_VERSION_MAJOR = '1'
+DEFINE DEPLOY_VERSION_MINOR = '0'
+DEFINE DEPLOY_VERSION_PATCH = '0'
+DEFINE DEPLOY_COMMIT_HASH = '0000000000000000000000000000000000000000'
 
 COLUMN CURRENT_SCHEMA       new_value CURRENT_SCHEMA      
 SELECT sys_context('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA FROM DUAL;
@@ -26,7 +29,29 @@ WHENEVER SQLERROR EXIT FAILURE
 WHENEVER OSERROR EXIT FAILURE
 
 EXEC PKG_APPLICATION.delete_application_p(ip_application_name => '&&APPLICATION_NAME', ip_fail_on_not_found => 'N' );
-EXEC pkg_application.begin_deployment_p(ip_application_name => '&&APPLICATION_NAME', ip_version => &&DEPLOY_VERSION, ip_deployment_type => pkg_application.c_deploy_type_initial);
+--
+BEGIN
+   pkg_application.begin_deployment_p     
+      ( ip_deploy_commit_hash => '&&DEPLOY_COMMIT_HASH'
+      , ip_application_name   => '&&APPLICATION_NAME'
+      , ip_major_version      => &&DEPLOY_VERSION_MAJOR
+      , ip_minor_version      => &&DEPLOY_VERSION_MINOR
+      , ip_patch_version      => &&DEPLOY_VERSION_PATCH
+      , ip_deployment_type    => pkg_application.c_deploy_type_initial  --c_deploy_type_minor
+      --, ip_redeploy_curr_okay => TRUE
+      );
+END;
+/
+
+BEGIN
+   pkg_application.set_deploy_notes_p
+   ( ip_application_name => '&&APPLICATION_NAME'
+   , ip_notes => 
+Q'{1.0.0
+* &&APPLICATION_NAME full/initial deploy}'
+   );
+END;
+/
 --
 EXEC pkg_application.add_dependency_p  (ip_application_name => '&&APPLICATION_NAME', ip_depends_on => 'CORE');
 --
