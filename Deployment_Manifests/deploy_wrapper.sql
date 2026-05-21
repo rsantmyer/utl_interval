@@ -1,0 +1,15 @@
+SET DEFINE ON
+SET SHOWMODE OFF
+COLUMN CURRENT_SCHEMA       new_value CURRENT_SCHEMA      
+
+SELECT sys_context('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA FROM DUAL;
+
+WHENEVER SQLERROR EXIT FAILURE
+WHENEVER OSERROR EXIT FAILURE
+
+--Set the DEFINE variable for the commit hash. Doing it this way means the commit will be one behind the one in in the repo
+DEFINE UTL_INTERVAL = e7f87d3465526e398fc5f472dbd1d95ab8c2c4d9
+
+ALTER SESSION DISABLE PARALLEL DML;
+@./deploy.sql &UTL_INTERVAL
+

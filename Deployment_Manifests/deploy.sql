@@ -3,7 +3,7 @@ DEFINE APPLICATION_NAME = 'UTL_INTERVAL'
 DEFINE DEPLOY_VERSION_MAJOR = '1'
 DEFINE DEPLOY_VERSION_MINOR = '0'
 DEFINE DEPLOY_VERSION_PATCH = '0'
-DEFINE DEPLOY_COMMIT_HASH = '98cc4cd60b7118dab553a3b264708e49e8aeb080'
+DEFINE DEPLOY_COMMIT_HASH = '&&1'
 
 COLUMN CURRENT_SCHEMA       new_value CURRENT_SCHEMA      
 SELECT sys_context('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA FROM DUAL;
@@ -98,5 +98,7 @@ Prompt Creating Functions
 SET DEFINE ON
 EXEC pkg_application.validate_objects_p(ip_application_name => '&&APPLICATION_NAME');
 EXEC pkg_application.set_deployment_complete_p(ip_application_name => '&&APPLICATION_NAME');
+
+PROMPT  &&APPLICATION_NAME deployment complete
 
 SPOOL OFF
