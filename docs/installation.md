@@ -39,3 +39,21 @@ After installation, run the smoke test:
 ```sql
 @Tests/smoke_test.sql
 ```
+
+## Package Artifact
+
+For repository distribution, build the Maven ZIP artifact from the repository
+root:
+
+```sh
+mvn package
+```
+
+The generated artifact is:
+
+```text
+target/utl_interval-0.1.0-SNAPSHOT.zip
+```
+
+The ZIP preserves the repository layout and includes build provenance metadata
+under `META-INF/`.

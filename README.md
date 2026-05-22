@@ -48,6 +48,7 @@ GROUP BY project_id;
 - [Installation](docs/installation.md)
 - [Usage and API](docs/usage.md)
 - [Deployment](docs/deployment.md)
+- [Maven Packaging](docs/maven-packaging.md)
 - [Testing](docs/testing.md)
 - [Contributing](docs/contributing.md)
 
@@ -58,6 +59,9 @@ Executable examples are available under [Examples](Examples).
 Deployment through `Deployment_Manifests/deploy_wrapper.sql` depends on
 [Core](https://github.com/rsantmyer/core), which provides `pkg_application`
 and deployment metadata validation.
+
+The Maven package metadata mirrors this dependency as
+`com.512itconsulting.database:core:0.1.0-SNAPSHOT`.
 
 ## License
 

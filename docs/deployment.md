@@ -63,3 +63,25 @@ The manifest calls:
 - `pkg_application.set_deployment_complete_p`
 
 Run `Tests/smoke_test.sql` after deployment to verify the user-facing API.
+
+## Maven Artifact
+
+The repository can also be packaged as a Maven-distributed ZIP:
+
+```sh
+mvn package
+```
+
+This creates:
+
+```text
+target/utl_interval-0.1.0-SNAPSHOT.zip
+```
+
+The ZIP contains the repository layout plus generated build provenance at:
+
+```text
+META-INF/utl_interval-build.properties
+```
+
+See [Maven Packaging](maven-packaging.md) for details.
