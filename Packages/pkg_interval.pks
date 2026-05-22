@@ -64,6 +64,10 @@ FUNCTION divide(ip_numerator   IN INTERVAL DAY TO SECOND
 /*
    Adds two INTERVAL DAY TO SECOND values.
 
+   This function primarily supports typ_interval. When calling it directly
+   from SQL, quote the function name as pkg_interval."ADD"(...) because ADD is
+   an Oracle SQL keyword.
+
    Parameters:
       ip_interval1 - first interval.
       ip_interval2 - second interval.

@@ -110,10 +110,15 @@ pkg_interval.add(
    RETURN INTERVAL DAY TO SECOND
 ```
 
-Adds two intervals.
+Adds two intervals. This function is primarily a support function for
+`typ_interval`, which uses it while implementing `sum_interval`.
+
+When calling it directly from SQL, quote the function name as
+`pkg_interval."ADD"(...)` because `ADD` is an Oracle SQL keyword. The unquoted
+form works in the existing PL/SQL type body.
 
 ```sql
-SELECT pkg_interval.add(
+SELECT pkg_interval."ADD"(
           INTERVAL '0 01:00:00' DAY TO SECOND,
           INTERVAL '0 00:30:00' DAY TO SECOND
        ) AS total_interval

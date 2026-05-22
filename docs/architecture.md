@@ -17,7 +17,8 @@ typ_interval
   -> delegates interval addition to pkg_interval.add
 
 pkg_interval
-  -> utility package for interval conversion and arithmetic
+  -> utility package for interval conversion and ratio helpers
+  -> includes add as a support function for typ_interval
 
 Deployment_Manifests/deploy_wrapper.sql
   -> SQL*Plus deployment entry point
@@ -52,6 +53,10 @@ Most users should use:
 `typ_interval` is public because Oracle aggregate implementations require a
 schema-level object type, but it is implementation-facing. Application SQL
 should not call the ODCI methods directly.
+
+`pkg_interval.add` is also primarily implementation-facing. It remains part of
+the package specification because `typ_interval` depends on it, but normal users
+usually do not need to call it directly.
 
 ## Oracle 23ai Note
 
