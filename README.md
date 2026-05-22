@@ -53,6 +53,12 @@ GROUP BY project_id;
 
 Executable examples are available under [Examples](Examples).
 
+## Deployment Dependency
+
+Deployment through `Deployment_Manifests/deploy_wrapper.sql` depends on
+[Core](https://github.com/rsantmyer/core), which provides `pkg_application`
+and deployment metadata validation.
+
 ## License
 
 This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
