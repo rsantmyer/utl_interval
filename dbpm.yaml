@@ -1,0 +1,20 @@
+package:
+  name: utl_interval
+  version: "1.0.0"
+  description: Interval utility package
+  vendor: rsantmyer
+  license: Apache-2.0
+
+database:
+  platform: oracle
+  minimum_version: "19c"
+
+core:
+  minimum_version: "3.0.0"
+
+dependencies: []
+
+scripts:
+  install: Deployment_Manifests/deploy.sql
+  upgrade: Deployment_Manifests/upgrade.sql
+  validate: Tests/smoke_test.sql

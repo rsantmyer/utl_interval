@@ -28,7 +28,6 @@ REM SET SHOWMODE ON
 WHENEVER SQLERROR EXIT FAILURE
 WHENEVER OSERROR EXIT FAILURE
 
-EXEC PKG_APPLICATION.delete_application_p(ip_application_name => '&&APPLICATION_NAME', ip_fail_on_not_found => 'N' );
 --
 BEGIN
    pkg_application.begin_deployment_p     
@@ -102,3 +101,4 @@ EXEC pkg_application.set_deployment_complete_p(ip_application_name => '&&APPLICA
 PROMPT  &&APPLICATION_NAME deployment complete
 
 SPOOL OFF
+EXIT SUCCESS
